@@ -6,7 +6,7 @@ class SearchResult extends Component {
     constructor( props ){
         super( props ); 
 
-        this.state = { isFavorite:  [] };     
+        this.state = { isFavorite:  this.props.favourites };     
         this.addToFavorite = this.addToFavorite.bind(this);        
     }
 
@@ -17,8 +17,9 @@ class SearchResult extends Component {
             favorites = _.without(favorites, album);
         else
             favorites.push(album);
-        this.setState({ isFavorite: favorites });
 
+        console.log( favorites );
+        this.setState({ isFavorite: favorites });
         this.props.onHandleFavourite( this.state.isFavorite );        
     }
 

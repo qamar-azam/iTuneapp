@@ -25,25 +25,32 @@ class Favourite extends Component {
         localStorage.setItem('favouriteAlbum', JSON.stringify( favourites ));
     }
 
-    render() {       
-        const favouriteAlbum = this.state.favouriteAlbum;
+    render() {   
+        let favouriteAlbum = null;
+        let listItems = null;
+
+        favouriteAlbum = this.state.favouriteAlbum;        
         
-        const listItems = favouriteAlbum.map( ( result, count ) =>
-            <li key={ count }>
-                <div className="artwork-image">
-                    <img src={result.artworkUrl100} alt="" />
-                </div>
+        if( favouriteAlbum ){
 
-                <div className="album-name">
-                    <a href={result.collectionViewUrl} target="_blank" >{ result.collectionName }</a>
-                </div>
+            listItems = favouriteAlbum.map( ( result, count ) =>
+                <li key={ count }>
+                    <div className="artwork-image">
+                        <img src={result.artworkUrl100} alt="" />
+                    </div>
 
-                <p className="price">{result.currency} {result.collectionPrice}</p>
+                    <div className="album-name">
+                        <a href={result.collectionViewUrl} target="_blank" >{ result.collectionName }</a>
+                    </div>
 
-                <button onClick={ () => this.handleClick(result) }>Remove</button>
+                    <p className="price">{result.currency} {result.collectionPrice}</p>
 
-            </li>
-        );        
+                    <button onClick={ () => this.handleClick(result) }>Remove</button>
+
+                </li>
+            );   
+
+        }     
 
         return (            
             <div className="favourite">

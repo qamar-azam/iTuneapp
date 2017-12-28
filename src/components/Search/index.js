@@ -10,13 +10,17 @@ class Search extends Component {
 
         this.state = { 
             searchInput: '',   
-            favourite: '',                 
+            favourite: [],                 
             searchResult: false 
-        };        
+        };                
 
         this.onChange        = this.onChange.bind(this);
         this.handleSubmit    = this.handleSubmit.bind(this);
         this.handleFavourite = this.handleFavourite.bind(this);
+    }
+
+    componentDidMount(){
+        this.setState({ favourite: JSON.parse( localStorage.getItem('favouriteAlbum') ) });
     }
 
     onChange( event ){
@@ -63,10 +67,10 @@ class Search extends Component {
                 { this.state.searchResult !== false &&
                     
                     <SearchResult 
-                        results={this.state.searchResult}                          
+                        results={this.state.searchResult}   
+                        favourites={this.state.favourite}                       
                         onHandleFavourite={this.handleFavourite} />
-                }
-                
+                }              
                 
             </div>
         );
